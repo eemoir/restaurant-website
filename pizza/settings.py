@@ -14,6 +14,7 @@ import os
 import django_heroku
 import dj_database_url
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -89,12 +90,12 @@ WSGI_APPLICATION = 'pizza.wsgi.application'
 
 DATABASES = {
     'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'mydatabase',
-            'USER': 'mydatabaseuser',
-            'PASSWORD': 'mypassword',
-            'HOST': '127.0.0.1',
-            'PORT': '5432',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'db_name',                      
+        'USER': 'db_user',
+        'PASSWORD': 'db_user_password',
+        'HOST': '',
+        'PORT': 'db_port_number',
     }
 }
 
@@ -102,8 +103,8 @@ db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-SESSION_COOKIE_NAME = "NEWCOOKIENAME"
-SESSION_COOKIE_DOMAIN = "moir-restaurant.herokuapp.com"
+SESSION_COOKIE_DOMAIN = "moir-restaurant.herokuapp.com/"
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
