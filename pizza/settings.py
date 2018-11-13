@@ -102,7 +102,7 @@ db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-
+SESSION_COOKIE_NAME = "NEWCOOKIENAME"
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
