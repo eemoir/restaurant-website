@@ -103,6 +103,7 @@ DATABASES['default'].update(db_from_env)
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_COOKIE_NAME = "NEWCOOKIENAME"
+SESSION_COOKIE_DOMAIN = "moir-restaurant.herokuapp.com"
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
