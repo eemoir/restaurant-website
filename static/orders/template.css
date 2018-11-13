@@ -1,0 +1,81 @@
+@keyframes fadeout { 0% { opacity: 1;
+    height: 100%;
+    line-height: 100%;
+    margin-top: 16px;
+    margin-bottom: 16px; }
+  75% { opacity: 0;
+    height: 100%;
+    line-height: 100%;
+    margin-top: 16px;
+    margin-bottom: 16px; }
+  100% { opacity: 0;
+    height: 0px;
+    line-height: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px; } }
+
+div { margin: 0; padding: 0; }
+
+p { display: inline-block; margin: 2px; }
+
+.hide { display: none; }
+
+.temp-element { visibility: hidden; }
+
+input[type=number] { width: 45px; }
+
+.menu-category-topping { width: 100%; }
+
+.menu-category-reg { width: 50%; }
+
+.extras-form-container { width: 100%; }
+
+table { width: 100%; }
+
+td { width: 33%; }
+
+.menu-category-label { font-size: 20px; font-weight: bold; text-align: center; margin: 5px; }
+
+.toppings-form, .sub-toppings-form { border: 5px solid green; border-radius: 3px; margin: 10px; padding: 5px; display: inline-flex; display: flex; flex-direction: row; flex-wrap: wrap; }
+
+.order-item { display: flex; flex-direction: row; flex-wrap: wrap; margin: 5px; }
+
+.shopping-cart, .past-order { border: 5px solid green; border-radius: 3px; margin: 10px; padding: 5px; display: inline-flex; display: flex; flex-direction: column; }
+
+.sub-toppings-form { display: flex; flex-direction: column; }
+
+.topping-block { width: 20%; }
+
+.sub-topping-block { display: flex; flex-direction: row; }
+
+.menu-category-title { width: 30%; }
+
+#menu-form { display: flex; flex-direction: column; }
+
+.menu-category { display: flex; flex-direction: row; border: 5px solid green; border-radius: 3px; margin: 10px; padding: 5px; display: inline-flex; }
+
+.shopping-cart { border: 5px solid green; border-radius: 3px; margin: 10px; padding: 5px; display: inline-flex; }
+
+input { font-family: Times New Roman; font-size: 16px; }
+
+button { margin: 2px; display: inline; }
+
+.repeat-order { width: 100px; }
+
+.topping-form { display: grid; grid-template-columns: auto auto auto auto auto auto; }
+
+.topping-block { display: flex; }
+
+.topping-name { margin: 0; }
+
+.submit-error { color: red; margin: 0; }
+
+.submit-message { animation-name: fadeout; animation-duration: 1.5s; animation-fill-mode: forwards; animation-play-state: paused; }
+
+#confirmation { display: flex; flex-direction: row; }
+
+#nav-bar { float: right; }
+
+h1 { text-align: center; }
+
+input[readonly] { border: 0px; }

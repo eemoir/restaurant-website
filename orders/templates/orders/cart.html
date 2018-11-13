@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Shopping Cart</title>
+		
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static 'orders/template.css' %}" >
+		<script type="text/javascript" src="{% static 'orders/script.js' %}"></script>
+	</head>
+
+	<body>
+		<input hidden id="username" value="{{user.get_username}}" />
+		<div id="nav-bar"><a href="{% url 'index' %}">Back to Menu</a>
+			<a href="{% url 'history' %}">View past orders</a>
+			<a href="{% url 'logout' %}">Logout</a></div>
+			<h1>Shopping Cart</h1>
+		{% if Shopping_cart.items %}
+			<form id="shopping-cart" action="/submit_order" method="POST" class="shopping-cart">
+				{% csrf_token %}
+				{% for item in Shopping_cart.items %}
+					<div>
+					<p class="item">{{item.item}}</p>
+					{% ifnotequal item.category "Pasta" %}
+						{% ifnotequal item.category "Salad" %}
+							<p class="category">{{item.category}}</p>
+						{% else %}
+							<p class="category hide">{{item.category}}</p>
+						{% endifnotequal %}
+					{% else %}
+						<p class="category hide">{{item.category}}</p>
+					{% endifnotequal %}
+					{% if 'toppings' in item %}
+						with <span class="toppings">{% for topping in item.toppings %}{% if forloop.last %}<p>{{topping}}</p>{% else %}<p>{{topping}},</p>{% endif %}{% endfor %}</span>{% endif %}
+					<p class="size">{% if 'size' in item %}({{item.size}}){% endif %}</p>
+					<p class="price">${{item.price}}</p> Quantity:<input class="quant" type="number" value="{{item.quantity}}" oninput="changeQuantity(this)" /><p class="item-total"> = ${{item.total}}</p>
+					<button type="button" onclick="deleteItem(this)" class="delete-button">Delete</button>
+					</div>
+				{% endfor %}
+				<div id="cart-total">Total: <p class="cart-price">${{Shopping_cart.total}}</p></div>
+				<div id="confirmation"><input id="reviewed" type="checkbox" /><p>I have reviewed the items in my cart and wish to submit my order</p><p id="quantity-error"></p>
+				<button type="submit" id="submit-order-button">Submit Order</button></div>
+				
+			</form>
+		{% else %}
+			<p>Nothing in the cart!</p>
+		{% endif %}
+	</body>
+
+</html>

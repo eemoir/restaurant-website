@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Past Orders</title>
+	{% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static 'orders/template.css' %}" >
+		<script type="text/javascript" src="{% static 'orders/script.js' %}"></script>
+</head>
+
+<body>
+	<div id="nav-bar"><a href="{% url 'index' %}">Back to Menu</a>
+	<a href="{% url 'cart' %}">Go to cart</a>
+	<a href="{% url 'logout' %}">Logout</a></div>
+	<h1>Past Orders</h1>
+	{% if past_orders %}
+	{% for item in past_orders %}
+		<form class="past-order" method="GET" action="#">
+		<p class="">{{item.new_time.date}}, {{item.new_time.time}}</p>
+		{% for thing in item.order %} 
+			<div class='order-item'>
+			<input type="text" name="item" value="{{thing.item}}" class="item" readonly /> 
+			{% if thing.category == "Regular Pizza" or thing.category == "Sicilian Pizza" %} 
+				<select name="category" class="item-category">
+					<option value="{{thing.category}}" class="category" selected>{{thing.category}}</option>
+					{% if thing.category == "Regular Pizza" %}
+					<option value="Sicilian Pizza">Sicilian Pizza</option>
+					{% else %}
+					<option value="Regular Pizza">Regular Pizza</option>
+					{% endif %}
+				</select>
+			{% else %}
+				{% ifnotequal thing.category "Pasta" %}
+					{% ifnotequal thing.category "Salad" %}
+						<input type="text" name="category" class="item-category" value="{{thing.category}}" readonly/>
+					{% else %} 
+						<input type="hidden" name="category" class="item-category" value="{{thing.category}}" readonly/>
+					{% endifnotequal %}
+				{% else %}
+					<input type="hidden" name="category" class="item-category" value="{{thing.category}}" readonly/>
+				{% endifnotequal %}
+			{% endif %}
+			{% if thing.item == "Sausage, Pepper and Onions" %}
+				<input type="text" name="size" value="{{thing.size}}" readonly />
+			{% elif thing.size %}
+				<select name="size" class="item-size">
+					<option value="{{thing.size}}" selected>{{thing.size}}</option>
+					{% if thing.size == "large" %} 
+					<option value="small">small</option>
+					{% else %}
+					<option value="large">large</option>
+					{% endif %}
+				</select>
+			{% endif %}
+			{% if thing.toppings %} <p>with</p> <div class="toppings-div">{% for topping in thing.toppings %} {% if thing.toppings|length == 1 or thing.toppings|length == 2 and forloop.first %}<input type="text" name="toppings" class="item-toppings" value=" {{topping}}" readonly>{% else %} {% if forloop.last %}<input type="text" name="toppings" class="item-toppings" value=" and {{topping}}" readonly>{% else %}<input type="text" name="toppings" class="item-toppings" value=" {{topping}}," readonly>{% endif %}{% endif %}{% endfor %}</div> {% endif %} 
+			<!--<input type="text" name="item-price" class="item-price" value="${{thing.price}}" readonly />--> <p>Quantity:</p><input type="number" name="quantity" class="item-quantity" value="{{thing.quantity}}" min="1" max="20"/> <p>=</p> <input type="text" name="item-total" class="item-total" value="${{thing.total}}" readonly />
+			{% if item.order|length > 1 %}
+			<button type="button" class="delete-item">Delete Item</button>
+			{% endif %}
+		</div>
+		{% endfor %}
+		<input type="text" name="order-total" class="order-total" value="Total: ${{item.total}}" readonly />
+		<p class="submit-error"></p>
+		<button type="button" class="repeat-order">Repeat order</button>
+		</form>
+	{% endfor %}
+
+	{% else %}
+
+	<p>Nothing to see here!</p>
+
+	{% endif %}
+	</body>
+
+</html>

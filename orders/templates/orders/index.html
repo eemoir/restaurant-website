@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Menu</title>
+		
+		{% load static %}
+		{% load sass_tags %}
+		<link rel="stylesheet" type="text/css" href="{% sass_src 'orders/template.scss' %}" />
+		<!--<link rel="stylesheet" type="text/css" href="{% static 'orders/template.css' %}" >-->
+		<script type="text/javascript" src="{% static 'orders/script.js' %}"></script>
+
+	</head>
+
+	<body> 
+		
+		{% if user.is_authenticated %}
+			<div id="nav-bar"><a href="{% url 'cart' %}">Go to cart</a>
+			<a href="{% url 'history' %}">View past orders</a>
+			<a href="{% url 'logout' %}">Logout</a></div>
+			<div id="logged-in" name="{{user.get_username}}">Welcome, {{user.get_username}}!</div>
+			<input hidden id="username" value="{{user.get_username}}" />
+		{% else %}
+			<div id="nav-bar"><a href="{% url 'login' %}">Already registered? Login</a>
+			<a href="{% url 'register' %}">New user? Register</a></div>
+		{% endif %}
+		<h1 id="title">Menu</h1>		
+		<p id="error"></p>	
+		<form id="menu-form">
+			<div class="menu-category"><div class="menu-category-topping"><div class="menu-category-label">Regular Pizza</div>
+
+			<table id="regular">
+				<tr><td class="menu-category-title"></td><td><b>Small</b></td><td><b>Large</b></td></tr>
+				{% for pizza in Regular_pizzas %}
+					<tr><td class="regular-pizza">{{pizza.name}}</td> <td class="price small">${{pizza.small}}</td> <td class="price large">${{pizza.large}}</td></tr>
+				{% endfor %}
+			</table>
+		</div>
+			<div class="extras-form-container"></div>
+			</div>
+				
+			<div class="menu-category">
+				<div class="menu-category-topping"><div class="menu-category-label">Sicilian Pizza</div>
+			<table id="sicilian">
+				<tr><td></td><td><b>Small</b></td><td><b>Large</b></td></tr>
+				{% for pizza in Sicilian_pizzas %}
+					<tr><td class="menu-item sicilian_pizza">{{pizza.name}}</td> <td class="price small">${{pizza.small}}</td> <td class="price large">${{pizza.large}}</td></tr>
+				{% endfor %}
+			</table>
+		</div>
+			<div class="extras-form-container"></div>
+			</div>
+
+			<div class="menu-category"><div class="menu-category-topping"><div class="menu-category-label">Subs</div>
+			<table id="sub">
+				<tr><td></td><td><b>Small</b></td><td><b>Large</b></td></tr>
+				{% for sub in Subs %}
+					<tr><td class="menu-item sub">{{sub.name}}</td> 
+					{% if sub.small %}<td class="price small">${{sub.small}}</td> 
+					{% else %} <td class="empty-price"></td> 
+					{% endif %} 
+					<td class="price large">${{sub.large}}</td></tr>
+				{% endfor %}
+			</table>
+		</div>
+			<div class="extras-form-container"></div>
+			</div>
+
+			<div class="menu-category"><div class="menu-category-reg"><div class="menu-category-label">Pasta</div>
+			<table id="pasta">
+				{% for pasta in Pastas %}
+					<tr><td class="menu-item pasta">{{pasta.name}}</td> <td class="price">${{pasta.price}}</td></tr>
+				{% endfor %}
+			</table>
+		</div>
+			</div>
+
+			<div class="menu-category"><div class="menu-category-reg"><div class="menu-category-label">Salads</div>
+			<table id="salad">
+				{% for salad in Salads %}
+					<tr><td class="menu-item salad">{{salad.name}}</td> <td class="price">${{salad.price}}</td></tr>
+				{% endfor %}
+			</table>
+		</div>
+			</div>
+
+			<div class="menu-category"><div class="menu-category-reg"><div class="menu-category-label">Dinner Platters</div>
+			<table id="platter">
+				<tr><td></td><td><b>Small</b></td><td><b>Large</b></td></tr>
+				{% for platter in Dinner_Platters %}
+					<tr><td class="menu-item platter">{{platter.name}}</td> <td class="price small">${{platter.small}}</td> <td class="price large">${{platter.large}}</td></tr>
+				{% endfor %}
+			</table>
+		</div>
+			</div>
+		</form>
+	</body>
+
+</html>
