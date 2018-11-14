@@ -103,12 +103,12 @@ DATABASES = {
     }
 }
 
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+"""db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)"""
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-SESSION_COOKIE_NAME = "newcookie"
-SESSION_COOKIE_DOMAIN = "moir-restaurant.herokuapp.com/"
+"""SESSION_COOKIE_NAME = "newcookie"
+SESSION_COOKIE_DOMAIN = "moir-restaurant.herokuapp.com/"""
 
 
 # Password validation
