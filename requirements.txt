@@ -6,7 +6,7 @@ Automat==0.7.0
 Click==7.0
 constantly==15.1.0
 dj-database-url==0.5.0
-Django==2.0.3
+Django==2.0.11
 django-appconf==1.0.2
 django-compressor==2.2
 django-heroku==0.3.1
